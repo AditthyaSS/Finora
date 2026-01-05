@@ -35,14 +35,14 @@
 
 | Feature | Status |
 |---------|--------|
-| 🔑 API Key Entry | ✅ Complete |
-| 🏠 Home Dashboard | ✅ Complete |
-| 📊 Expense Tracking | ✅ Complete |
-| 🎯 Goal Planning | ✅ Complete |
-| � AI Chat Assistant | ✅ Complete |
-| 📈 Monthly Reports | ✅ Complete |
-| 🌙 Dark/Light Theme | ✅ Complete |
-| � Data Export | ✅ Complete |
+| 🔑 API Key Entry | ✅ Completed |
+| 🏠 Home Dashboard | ✅ Completed |
+| 📊 Expense Tracking | 🧪 Testing Ongoing |
+| 🎯 Goal Planning | 🧪 Testing Ongoing |
+| 💬 AI Chat Assistant | 🧪 Testing Ongoing |
+| 📈 Monthly Reports | 🧪 Testing Ongoing |
+| 🌙 Dark/Light Theme | ✅ Completed |
+| 📤 Data Export | 🧪 Testing Ongoing |
 | 🔔 Notifications | 🚧 Coming Soon |
 | 📱 Bank Sync | 🚧 Planned |
 
