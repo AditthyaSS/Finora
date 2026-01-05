@@ -79,3 +79,24 @@ ios/Podfile.lock
 *.tmp
 *.temp
 .flutter-plugins
+
+# Secrets and API keys (extra safety)
+**/secrets/
+**/api_key*
+**/apikey*
+secrets.dart
+secrets.json
+
+# Debug and profile builds
+pubspec.lock
+
+# Platform specific
+android/.gradle/
+android/local.properties
+ios/.symlinks/
+linux/flutter/ephemeral
+macos/Flutter/ephemeral
+windows/flutter/ephemeral
+
+# Web build output
+web/build/
