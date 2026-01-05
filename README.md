@@ -61,6 +61,60 @@
 
 ---
 
+## 🏗️ Architecture
+
+```mermaid
+graph TB
+    subgraph UI["📱 UI Layer"]
+        WS[Welcome Screen]
+        HS[Home Screen]
+        DS[Dashboard]
+        CS[Chat Screen]
+        GS[Goals Screen]
+        SS[Settings]
+    end
+
+    subgraph State["🔄 State Management"]
+        AP[AppProvider]
+        FP[FinanceProvider]
+        CP[ChatProvider]
+    end
+
+    subgraph Services["⚙️ Services"]
+        GS2[GeminiService]
+        STS[StorageService]
+        EXS[ExportService]
+    end
+
+    subgraph Data["💾 Data Layer"]
+        HV[(Hive DB)]
+        SP[(SharedPrefs)]
+    end
+
+    subgraph External["☁️ External"]
+        GAI[Gemini AI API]
+    end
+
+    UI --> State
+    State --> Services
+    GS2 --> GAI
+    STS --> HV
+    STS --> SP
+    FP --> STS
+    FP --> GS2
+    CP --> GS2
+    AP --> STS
+    AP --> GS2
+```
+
+<div align="center">
+
+**Data Flow**: UI → Providers → Services → Local Storage / Gemini API
+
+</div>
+
+---
+
 ## 🚀 Getting Started
 
 ### Prerequisites
