@@ -20,6 +20,10 @@
 
 ## 🚧 Project Status
 
+<div align="center">
+<img src="assets/images/construction_icon.avif" width="120" alt="Under Construction"/>
+</div>
+
 > **This repository is actively under development!**
 > 
 > We're building the MVP version of Finora. Features are being added regularly.
@@ -187,10 +191,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 <div align="center">
 
+<img src="assets/images/flutter_icon.png" width="60" alt="Built with Flutter"/>
+
 ### Made with ❤️ by Aditthya
 
 **⭐ Star this repo if you find it useful!**
 
-[![GitHub stars](https://img.shields.io/github/stars/yourusername/finora?style=social)](https://github.com/yourusername/finora)
+[![GitHub stars](https://img.shields.io/github/stars/AditthyaSS/Finance.ai?style=social)](https://github.com/AditthyaSS/Finance.ai)
 
 </div>
