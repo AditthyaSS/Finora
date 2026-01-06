@@ -6,27 +6,29 @@ class GeminiService {
   String? _apiKey;
   String? _selectedModel;
 
-  // List of models to try in order of preference (newest to oldest)
+  // List of models to try in order of preference
+  // Most stable/reliable models first, then newer experimental ones
   static const List<String> _availableModels = [
-    // Gemini 3 models (preview)
+    // Most stable and widely available (try these first)
+    'gemini-pro',
+    'gemini-1.5-flash',
+    'gemini-1.5-pro',
+    // Versioned stable models
+    'gemini-1.0-pro',
+    'gemini-1.5-flash-latest',
+    'gemini-1.5-pro-latest',
+    // Newer 2.0 models
+    'gemini-2.0-flash',
+    'gemini-2.0-flash-lite',
+    // Latest 2.5 models
+    'gemini-2.5-flash',
+    'gemini-2.5-pro',
+    // Gemini 3 preview models
     'gemini-3-pro-preview',
     'gemini-3-flash-preview',
     'gemini-3.0-pro',
     'gemini-3.0-flash',
-    // Latest 2.5 models
-    'gemini-2.5-flash',
-    'gemini-2.5-pro',
-    // 2.0 models
-    'gemini-2.0-flash',
-    'gemini-2.0-flash-lite',
-    // 1.5 models
-    'gemini-1.5-flash-latest',
-    'gemini-1.5-flash',
-    'gemini-1.5-pro-latest',
-    'gemini-1.5-pro',
-    // Legacy models
-    'gemini-pro',
-    'gemini-1.0-pro',
+    // Old format
     'models/gemini-pro',
   ];
 
@@ -38,6 +40,7 @@ class GeminiService {
   /// Validates API key and automatically finds a working model
   Future<bool> validateAndInitialize(String apiKey) async {
     lastError = null;
+    String lastErrorMessage = '';
     
     for (final modelName in _availableModels) {
       try {
@@ -49,7 +52,7 @@ class GeminiService {
 
         // Test the API key with a simple prompt
         final response = await model.generateContent([
-          Content.text('Say "Hello" in one word.')
+          Content.text('Hi')
         ]);
 
         if (response.text != null) {
@@ -60,17 +63,25 @@ class GeminiService {
           return true;
         }
       } on GenerativeAIException catch (e) {
+        lastErrorMessage = e.message;
         print('Model $modelName failed: ${e.message}');
-        // Continue to try next model
+        // If API key is invalid, stop trying
+        if (e.message.contains('API key') || e.message.contains('invalid') || e.message.contains('unauthorized')) {
+          lastError = 'Invalid API key: ${e.message}';
+          return false;
+        }
         continue;
       } catch (e) {
+        lastErrorMessage = e.toString();
         print('Model $modelName error: $e');
-        // Continue to try next model
         continue;
       }
     }
     
-    lastError = 'No compatible model found. Please check your API key and try again.';
+    // Show the last error we got
+    lastError = lastErrorMessage.isNotEmpty 
+        ? lastErrorMessage 
+        : 'No compatible model found. Please check your API key.';
     return false;
   }
 
