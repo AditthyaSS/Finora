@@ -76,7 +76,7 @@ class InsightCard extends StatelessWidget {
               )
             else
               Text(
-                insight ?? 'Add some transactions to get personalized insights!',
+                insight ?? 'Add your Gemini API key in Settings to unlock AI-powered insights!',
                 style: const TextStyle(
                   fontSize: 15,
                   color: Colors.white,

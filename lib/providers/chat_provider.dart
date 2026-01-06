@@ -56,16 +56,14 @@ class ChatProvider extends ChangeNotifier {
         categoryExpenses: categoryExpenses,
       );
 
-      if (response != null) {
-        final aiMessage = ChatMessage(
-          id: _uuid.v4(),
-          content: response,
-          isUser: false,
-        );
-        
-        await StorageService.addChatMessage(aiMessage);
-        _messages.add(aiMessage);
-      }
+      final aiMessage = ChatMessage(
+        id: _uuid.v4(),
+        content: response ?? 'To chat with me, please add your Gemini API key in Settings. It\'s free and takes just a moment!',
+        isUser: false,
+      );
+      
+      await StorageService.addChatMessage(aiMessage);
+      _messages.add(aiMessage);
     } catch (e) {
       _error = 'Failed to get response';
       

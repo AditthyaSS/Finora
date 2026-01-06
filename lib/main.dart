@@ -95,11 +95,8 @@ class _AppInitializerState extends State<AppInitializer> {
     await appProvider.initialize();
 
     if (mounted) {
-      if (appProvider.hasApiKey) {
-        Navigator.pushReplacementNamed(context, '/main');
-      } else {
-        Navigator.pushReplacementNamed(context, '/welcome');
-      }
+      // Always navigate to main app - API key is now optional
+      Navigator.pushReplacementNamed(context, '/main');
     }
   }
 

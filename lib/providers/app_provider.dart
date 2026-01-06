@@ -28,7 +28,7 @@ class AppProvider extends ChangeNotifier {
       
       final apiKey = StorageService.getApiKey();
       if (apiKey != null && apiKey.isNotEmpty) {
-        _geminiService.initialize(apiKey);
+        await _geminiService.initialize(apiKey);
         _hasApiKey = true;
       }
       

@@ -125,58 +125,98 @@ class SettingsScreen extends StatelessWidget {
 
   void _showApiKeyDialog(BuildContext context) {
     final controller = TextEditingController();
-    final appProvider = context.read<AppProvider>();
 
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Update API Key'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextField(
-              controller: controller,
-              decoration: const InputDecoration(
-                labelText: 'New API Key',
-                hintText: 'Paste your Gemini API key',
-              ),
-              obscureText: true,
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              appProvider.removeApiKey();
-              Navigator.pop(context);
-              Navigator.pushReplacementNamed(context, '/welcome');
+      builder: (dialogContext) => StatefulBuilder(
+        builder: (context, setState) {
+          return Consumer<AppProvider>(
+            builder: (context, appProvider, child) {
+              return AlertDialog(
+                title: const Text('Update API Key'),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    TextField(
+                      controller: controller,
+                      decoration: const InputDecoration(
+                        labelText: 'New API Key',
+                        hintText: 'Paste your Gemini API key',
+                      ),
+                      obscureText: true,
+                      enabled: !appProvider.isLoading,
+                    ),
+                    if (appProvider.error != null) ...[
+                      const SizedBox(height: 12),
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: AppTheme.error.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Row(
+                          children: [
+                            const Icon(Icons.error_outline, color: AppTheme.error, size: 18),
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: Text(
+                                appProvider.error!,
+                                style: const TextStyle(color: AppTheme.error, fontSize: 12),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ],
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: appProvider.isLoading ? null : () {
+                      appProvider.removeApiKey();
+                      Navigator.pop(context);
+                      Navigator.pushReplacementNamed(context, '/welcome');
+                    },
+                    child: const Text(
+                      'Remove Key',
+                      style: TextStyle(color: AppTheme.error),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: appProvider.isLoading ? null : () {
+                      appProvider.clearError();
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Cancel'),
+                  ),
+                  TextButton(
+                    onPressed: appProvider.isLoading ? null : () async {
+                      if (controller.text.trim().isNotEmpty) {
+                        appProvider.clearError();
+                        final success = await appProvider.validateAndSaveApiKey(
+                          controller.text.trim(),
+                        );
+                        if (success && context.mounted) {
+                          Navigator.pop(context);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('API key updated successfully')),
+                          );
+                        }
+                      }
+                    },
+                    child: appProvider.isLoading 
+                        ? const SizedBox(
+                            width: 16,
+                            height: 16,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          )
+                        : const Text('Update'),
+                  ),
+                ],
+              );
             },
-            child: const Text(
-              'Remove Key',
-              style: TextStyle(color: AppTheme.error),
-            ),
-          ),
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
-          ),
-          TextButton(
-            onPressed: () async {
-              if (controller.text.trim().isNotEmpty) {
-                final success = await appProvider.validateAndSaveApiKey(
-                  controller.text.trim(),
-                );
-                if (success && context.mounted) {
-                  Navigator.pop(context);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('API key updated successfully')),
-                  );
-                }
-              }
-            },
-            child: const Text('Update'),
-          ),
-        ],
+          );
+        },
       ),
     );
   }

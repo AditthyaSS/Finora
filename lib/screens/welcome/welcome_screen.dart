@@ -236,6 +236,34 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                       },
                     ),
                     
+                    const SizedBox(height: AppTheme.spacingMd),
+                    
+                    // Skip Button
+                    SizedBox(
+                      width: double.infinity,
+                      height: 48,
+                      child: OutlinedButton(
+                        onPressed: () {
+                          Navigator.of(context).pushReplacementNamed('/main');
+                        },
+                        style: OutlinedButton.styleFrom(
+                          side: BorderSide(
+                            color: isDark 
+                                ? AppTheme.darkTextSecondary 
+                                : AppTheme.lightTextSecondary,
+                          ),
+                        ),
+                        child: Text(
+                          'Skip for now',
+                          style: TextStyle(
+                            color: isDark 
+                                ? AppTheme.darkTextSecondary 
+                                : AppTheme.lightTextSecondary,
+                          ),
+                        ),
+                      ),
+                    ),
+                    
                     const SizedBox(height: AppTheme.spacingXl),
                     
                     // Info Card
