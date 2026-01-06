@@ -35,16 +35,36 @@
 
 | Feature | Status |
 |---------|--------|
-| 🔑 API Key Entry | ✅ Completed |
+| 🔑 API Key Entry (Optional) | ✅ Completed |
 | 🏠 Home Dashboard | ✅ Completed |
-| 📊 Expense Tracking | 🧪 Testing Ongoing |
-| 🎯 Goal Planning | 🧪 Testing Ongoing |
-| 💬 AI Chat Assistant | 🧪 Testing Ongoing |
-| 📈 Monthly Reports | 🧪 Testing Ongoing |
+| 📊 Expense Tracking | ✅ Completed |
+| 🎯 Goal Planning | ✅ Completed |
+| 💬 AI Chat Assistant | ✅ Completed |
+| 📈 Monthly Reports | ✅ Completed |
 | 🌙 Dark/Light Theme | ✅ Completed |
-| 📤 Data Export | 🧪 Testing Ongoing |
+| 📤 Data Export | ✅ Completed |
+| 🤖 Auto Model Detection | ✅ **NEW** |
 | 🔔 Notifications | 🚧 Coming Soon |
 | 📱 Bank Sync | 🚧 Planned |
+
+---
+
+## 🤖 Smart AI Model Detection
+
+Finora automatically detects and uses the best available Gemini model for your API key:
+
+```
+Gemini 3 → Gemini 2.5 → Gemini 2.0 → Gemini 1.5 → Legacy
+```
+
+**Supported Models:**
+- `gemini-3-pro-preview`, `gemini-3-flash-preview`
+- `gemini-2.5-flash`, `gemini-2.5-pro`
+- `gemini-2.0-flash`, `gemini-2.0-flash-lite`
+- `gemini-1.5-flash`, `gemini-1.5-pro`
+- `gemini-pro`, `gemini-1.0-pro`
+
+No manual configuration needed - the app finds what works! 🎉
 
 ---
 
@@ -125,16 +145,16 @@ graph TB
 
 - Flutter SDK (^3.10.4)
 - Dart SDK
-- A [Gemini API Key](https://aistudio.google.com/app/apikey)
+- A [Gemini API Key](https://aistudio.google.com/app/apikey) *(optional - app works without it)*
 
 ### Installation
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/finora.git
+git clone https://github.com/AditthyaSS/Finance.ai.git
 
 # Navigate to project
-cd finora
+cd Finance.ai
 
 # Install dependencies
 flutter pub get
@@ -143,11 +163,13 @@ flutter pub get
 flutter run
 ```
 
+> 💡 **Tip:** You can explore the app without an API key! Add one later in Settings to unlock AI features.
+
 ---
 
 ## 🤝 Contributing
 
-**Contributions are welcome and appreciated!** �
+**Contributions are welcome and appreciated!** 🙌
 
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
@@ -174,6 +196,7 @@ Finora is **privacy-first**:
 - ✅ API key stored securely on device
 - ✅ No analytics or tracking
 - ✅ No data sent to our servers
+- ✅ Works offline (except AI features)
 
 ---
 
