@@ -202,7 +202,21 @@ Finora is **privacy-first**:
 
 ## 📸 Screenshots
 
-> 📷 *Screenshots coming soon...*
+<div align="center">
+
+| Home | Dashboard | Goals |
+|:---:|:---:|:---:|
+| <img src="assets/images/1000052093.jpg" width="200"/> | <img src="assets/images/1000052094.jpg" width="200"/> | <img src="assets/images/1000052095.jpg" width="200"/> |
+
+| Chat | Reports | Settings |
+|:---:|:---:|:---:|
+| <img src="assets/images/1000052096.jpg" width="200"/> | <img src="assets/images/1000052097.jpg" width="200"/> | <img src="assets/images/1000052098.jpg" width="200"/> |
+
+| Add Transaction | Goal Details | Welcome |
+|:---:|:---:|:---:|
+| <img src="assets/images/1000052099.jpg" width="200"/> | <img src="assets/images/1000052100.jpg" width="200"/> | <img src="assets/images/1000052101.jpg" width="200"/> |
+
+</div>
 
 ---
 
